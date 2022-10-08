@@ -1,0 +1,13 @@
+https://docs.qmk.fm/#/newbs_getting_started
+Descargar qmk_msys.exe
+para ejecutar el qmk msys hay que abrir eso desde el menu de inicio
+
+set configs
+qmk config user.keyboard=kprepublic/bm80v2_iso
+qmk config user.keymap=alejandroppir
+
+desde qmk msys se compila haciendo esto y el output está en la carpeta .build
+qmk compile -kb kprepublic/bm80v2_iso -km alejandroppir
+
+puede estar bien esto
+https://www.youtube.com/watch?v=vA32gDmvllA
