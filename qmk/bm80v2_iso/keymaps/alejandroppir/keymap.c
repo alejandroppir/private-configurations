@@ -17,10 +17,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_CST] = LAYOUT_tkl_iso(
         KC_ESC,           KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,   KC_F11,  KC_F12,     KC_PSCR, KC_SLCK, KC_PAUS,
-        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,     KC_MINS,  KC_EQL,  KC_BSPC,    KC_DEL,  KC_PGUP, KC_HOME,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,     KC_LBRC,  KC_RBRC,             KC_INS,  KC_PGDN, KC_END,
-        KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT,  KC_NUHS, KC_ENT,
-        KC_LSFT,TG(_UTL), KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,   KC_SLSH,           KC_RSFT,             KC_UP,
+        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,     ES_SLSH,  ES_PLUS, KC_BSPC,    KC_DEL,  KC_PGUP, KC_HOME,
+        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,     ES_LBRC,  ES_RBRC,             KC_INS,  KC_PGDN, KC_END,
+        KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    ES_NTIL,  ES_QUOT,  ES_SCLN, KC_ENT,
+        KC_LSFT,TG(_UTL), KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,   ES_MINS,           KC_RSFT,             KC_UP,
         KC_LCTL, KC_LGUI, KC_LALT,                   KC_SPC,                                      KC_RALT,  MO(_UTL), KC_APP , KC_RCTL,    KC_LEFT, KC_DOWN, KC_RGHT
     ),
 
@@ -28,7 +28,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC,           KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,   KC_F11,  KC_F12,     KC_PSCR, KC_SLCK, KC_PAUS,
         ES_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,     ES_MINS,  ES_EQL,  KC_BSPC,    KC_DEL,  KC_PGUP, KC_HOME,
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,     ES_LBRC,  ES_RBRC,             KC_INS,  KC_PGDN, KC_END,
-        KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    ES_SCLN,  ES_QUOT,  ES_BSLS, KC_ENT,
+        KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    ES_BSLS,  ES_QUOT,  ES_SCLN, KC_ENT,
         KC_LSFT, _______, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,   ES_SLSH,           KC_RSFT,             KC_UP,
         KC_LCTL, KC_LGUI, KC_LALT,                   KC_SPC,                                      KC_RALT,  MO(_UTL), KC_APP , KC_RCTL,    KC_LEFT, KC_DOWN, KC_RGHT
     ),
@@ -63,6 +63,51 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 const custom_key_t custom_shift_keys[] = {
+    // CST keyboard
+     // row1
+    {ES_GRV, ES_TILD, 1<<_USB},
+    {KC_2, ES_AT, 1<<_CST},
+    {KC_3, ES_HASH, 1<<_CST},
+    {KC_6, ES_CIRC, 1<<_CST},
+    {KC_7, ES_AMPR, 1<<_CST},
+    {KC_8, ES_ASTR, 1<<_CST},
+    {KC_9, ES_LPRN, 1<<_CST},
+    {KC_0, ES_RPRN, 1<<_CST},
+    {ES_SLSH, ES_QUES, 1<<_CST},
+    {ES_PLUS, ES_EQL, 1<<_CST},
+    // row2
+    {ES_LBRC, ES_LCBR, 1<<_CST},
+    {ES_RBRC, ES_RCBR, 1<<_CST},
+    // row3
+    {ES_QUOT, ES_DQUO, 1<<_CST},
+    {ES_SCLN, ES_COLN, 1<<_CST},
+    // row4
+    {KC_COMM, ES_LABK, 1<<_CST},
+    {KC_DOT, ES_RABK, 1<<_CST},
+
+    // LAB keyboard
+    // row1
+    {ES_GRV, ES_TILD, 1<<_LAB},
+    {KC_2, ES_AT, 1<<_LAB},
+    {KC_3, ES_HASH, 1<<_LAB},
+    {KC_6, ES_CIRC, 1<<_LAB},
+    {KC_7, ES_AMPR, 1<<_LAB},
+    {KC_8, ES_ASTR, 1<<_LAB},
+    {KC_9, ES_LPRN, 1<<_LAB},
+    {KC_0, ES_RPRN, 1<<_LAB},
+    {ES_EQL, ES_PLUS, 1<<_LAB},
+    // row2
+    {ES_LBRC, ES_LCBR, 1<<_LAB},
+    {ES_RBRC, ES_RCBR, 1<<_LAB},
+    // row3
+    {ES_SCLN, ES_COLN, 1<<_LAB},
+    {ES_QUOT, ES_DQUO, 1<<_LAB},
+    {ES_BSLS, ES_PIPE, 1<<_LAB},
+    // row4
+    {KC_COMM, ES_LABK, 1<<_LAB},
+    {KC_DOT, ES_RABK, 1<<_LAB},
+    {ES_SLSH, ES_QUES, 1<<_LAB},
+
     // USB keyboard
     // row1
     {ES_GRV, ES_TILD, 1<<_USB},
@@ -85,11 +130,40 @@ const custom_key_t custom_shift_keys[] = {
     {KC_COMM, ES_LABK, 1<<_USB},
     {KC_DOT, ES_RABK, 1<<_USB},
     {ES_SLSH, ES_QUES, 1<<_USB},
-
-
 };
 
 const custom_key_t custom_altgr_keys[] = {
+    // LAB keyboard
+    // row1
+    {ES_GRV, ES_TILD, 1<<_CST},
+    {KC_1, ES_IEXL, 1<<_CST},
+    {KC_2, ES_AT, 1<<_CST},
+    {KC_7, ES_PIPE, 1<<_CST},
+    {ES_SLSH, ES_BSLS, 1<<_CST},
+    {ES_PLUS, ES_EQL, 1<<_CST},
+    // row3
+    {ES_QUOT, ES_ACUT, 1<<_CST},
+    // row4
+
+    // LAB keyboard
+    // row1
+    {ES_GRV, ES_TILD, 1<<_LAB},
+    {KC_1, ES_IEXL, 1<<_LAB},
+    {KC_2, ES_FORD, 1<<_LAB},
+    {KC_3, ES_MORD, 1<<_LAB},
+    {KC_5, ES_EURO, 1<<_LAB},
+    {KC_6, ES_CIRC, 1<<_LAB},
+    {KC_7, ES_ASTR, 1<<_LAB},
+    {KC_9, ES_QUOT, 1<<_LAB},
+    {KC_0, ES_QUOT, 1<<_LAB},
+    {ES_EQL, ES_PLUS, 1<<_LAB},
+    // row3
+    {ES_BSLS, ES_NOT, 1<<_LAB},
+    // row4
+    {KC_N, ES_NTIL, 1<<_LAB},
+    {KC_C, ES_CCED, 1<<_LAB},
+    {ES_SLSH, ES_IQUE, 1<<_LAB},
+
     // USB keyboard
     // row1
     {ES_GRV, ES_TILD, 1<<_USB},
@@ -111,7 +185,8 @@ const custom_key_t custom_altgr_keys[] = {
 };
 
 const custom_key_t custom_altgrsh_keys[] = {
-    // USB keyboard
+    // CST keyboard
+    {ES_SLSH, ES_IQUE, 1<<_CST},
 
 };
 
