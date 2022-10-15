@@ -9,10 +9,12 @@
 enum tap_dance{
     TD_LSFT_CAPS,
     TD_RSFT_CAPS,
+    TD_ACUTE
 };
 qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_LSFT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
     [TD_RSFT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_RSFT, KC_CAPS),
+    [TD_ACUTE] = ACTION_TAP_DANCE_DOUBLE(ES_ACUT, ES_QUOT)
 };
 
 enum layers {
@@ -20,18 +22,28 @@ enum layers {
     _LAB, // Labeled layout
     _ESB, // ES layout
     _USB, // US Layout
+    _EXT,  // Extra layout
     _UTL  // Utils layout
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_CST] = LAYOUT_tkl_iso(
-        KC_ESC,           KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,   KC_F11,  KC_F12,     KC_PSCR, KC_SLCK, KC_PAUS,
-        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,     ES_SLSH,  ES_PLUS, KC_BSPC,    KC_DEL,  KC_PGUP, KC_HOME,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,     ES_LBRC,  ES_RBRC,             KC_INS,  KC_PGDN, KC_END,
-        ES_ACUT, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    ES_NTIL,  ES_QUOT,  ES_SCLN, KC_ENT,
-        TD(TD_LSFT_CAPS),TG(_UTL), KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,   ES_MINS,           TD(TD_RSFT_CAPS),             KC_UP,
-        KC_LCTL, KC_LGUI, KC_LALT,                   KC_SPC,                                      KC_RALT,  MO(_UTL), KC_APP , KC_RCTL,    KC_LEFT, KC_DOWN, KC_RGHT
+        KC_ESC,                      KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,      KC_F11,   KC_F12,           KC_PSCR, KC_SLCK, KC_PAUS,
+        KC_GRV,             KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,     ES_MINS,     ES_PLUS,  KC_BSPC,          KC_DEL,  KC_PGUP, KC_HOME,
+        KC_TAB,             KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,     ES_LBRC,     ES_RBRC,                    KC_INS,  KC_PGDN, KC_END,
+        TG(_EXT),           KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    ES_NTIL,  TD(TD_ACUTE),ES_SCLN,  KC_ENT,
+        TD(TD_LSFT_CAPS),   ES_QUOT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,   ES_SLSH,               TD(TD_RSFT_CAPS),          KC_UP,
+        KC_LCTL,            KC_LGUI, KC_LALT,                   KC_SPC,                                      KC_RALT,  MO(_UTL),    KC_APP ,  KC_RCTL,          KC_LEFT, KC_DOWN, KC_RGHT
+    ),
+
+    [_EXT ] = LAYOUT_tkl_iso(
+        _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,  _______, _______,    KC_KP_7, KC_KP_8, KC_KP_9,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,  _______, _______,    KC_KP_4, KC_KP_5, KC_KP_6,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,  _______,             KC_KP_1, KC_KP_2, KC_KP_3,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,  _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,           KC_0,                _______,
+        _______, _______, _______,                   _______,                                     _______,  MO(_UTL), _______, _______,    _______, _______, _______
     ),
 
     [_LAB ] = LAYOUT_tkl_iso(
@@ -90,6 +102,7 @@ const custom_key_t custom_shift_keys[] = {
     {ES_RBRC, ES_RCBR, 1<<_CST},
     // row3
     {ES_QUOT, ES_DQUO, 1<<_CST},
+    {TD(TD_ACUTE), ES_QUOT, 1<<_CST},
     {ES_SCLN, ES_COLN, 1<<_CST},
     // row4
     {KC_COMM, ES_LABK, 1<<_CST},
@@ -143,7 +156,7 @@ const custom_key_t custom_shift_keys[] = {
 };
 
 const custom_key_t custom_altgr_keys[] = {
-    // LAB keyboard
+    // CUS keyboard
     // row1
     {ES_GRV, ES_TILD, 1<<_CST},
     {KC_1, ES_IEXL, 1<<_CST},
@@ -153,6 +166,7 @@ const custom_key_t custom_altgr_keys[] = {
     {ES_PLUS, ES_EQL, 1<<_CST},
     // row3
     {ES_QUOT, ES_ACUT, 1<<_CST},
+    {TD(TD_ACUTE), ES_DQUO, 1<<_CST},
     // row4
 
     // LAB keyboard
