@@ -5,6 +5,11 @@
 #include "quantum/keymap_extras/keymap_us_international.h"
 #include "features/custom_keys.h"
 
+// stored colors
+bool rgb_stored = false;
+uint8_t prev_mode = 0;
+HSV prev_hsv;
+
 // Tap Dance declarations
 enum tap_dance{
     TD_LSFT_CAPS,
@@ -19,10 +24,10 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 enum layers {
     _CST, // Custom layout
+    _EXT, // Extra layout
     _LAB, // Labeled layout
     _ESB, // ES layout
     _USB, // US Layout
-    _EXT,  // Extra layout
     _UTL  // Utils layout
 };
 
@@ -225,6 +230,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   // Your macros ...
   return true;
 }
+
+void rgb_matrix_indicators_user(void) {
+    switch (get_highest_layer(layer_state)) {
+        case _EXT:
+            if(!rgb_stored) {
+                prev_hsv = rgb_matrix_get_hsv();
+                prev_mode = rgb_matrix_get_mode();
+                rgb_stored = true;
+                rgblight_mode(RGB_MATRIX_BREATHING);
+            }
+            break;
+        default:
+            if(rgb_stored) {
+                rgb_matrix_mode_noeeprom(prev_mode);
+                rgb_matrix_sethsv_noeeprom(prev_hsv.h, prev_hsv.s, prev_hsv.v);
+            }
+            rgb_stored = false;
+            break;
+    }
+}
+
 
 /* const key_override_t one_key_override =
     ko_make_with_layers(MOD_MASK_CSA, KC_1, KC_4, 1<<_USB);  // Shift 1 is 2
