@@ -39,13 +39,17 @@ qmk compile -kb kprepublic/bm80v2_iso -km alejandroppir
 ## Flashear
 
 Abrir qmk toolbox
+
 Poner el teclado en modo flash (tecla utils, y escape)
+
 Cargar el fichero.hex
+
 Si nos da error de dfu-programmer, descargarlo y meterlo en %AppData%/Local/QMK/Toolbox https://github.com/dfu-programmer/dfu-programmer
+
 Darle a Flash
 
-Desenchufar y enchufar teclado
+Desenchufar y enchufar teclado (si no lo autoreconoce)
 
 ## Errores
 
-Si no nos flashea, reiniciar
+Si no nos flashea, reiniciar pc
