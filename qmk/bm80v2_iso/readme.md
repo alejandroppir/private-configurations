@@ -1,21 +1,51 @@
-# bm80v2_iso
+# Tutorial QMK
 
-A 80% ISO hotswap inswitch RGB keyboard.
+https://docs.qmk.fm/#/newbs_getting_started
 
-* Keyboard Maintainer: [edwardslau](https://github.com/edwardslau)
-* Hardware Supported: BM80V2_ISO
-* Hardware Availability: [KP Republic](https://kprepublic.com/products/bm80-iso-bm80rgb-80-rgb-hot-swappable-custom-mechanical-keyboard-pcb-programmed-rgb-switch-underglow-type-c-qmk-via?_pos=9&_sid=b43edd6ac&_ss=r)
+## Descargas
 
-Make example for this keyboard (after setting up your build environment):
+Descargar qmk_msys.exe
+Descargar qmk toolbox
 
-    make kprepublic/bm80v2_iso:default
+## Configuraciones
 
-Flashing example for this keyboard:
+```shell
+qmk setup
+qmk config user.keyboard=kprepublic/bm80v2_iso
+qmk config user.keymap=alejandroppir
+```
 
-    make kprepublic/bm80v2_iso:default:flash
+Abrir qmk toolbox como admin e instalar drivers
 
-## Bootloader
+## Crear nuevo mapeo
 
-* **Physical reset button**: Briefly press the button on the back of the PCB - some may have pads you must short instead
+En qmk msys
 
-See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
+```shell
+qmk new-keymap
+```
+
+Esto nos creará un nuevo mapeo con el nombre que hemos configurado
+Pegar el fichero rules.mk dentro de bm80v2_iso
+
+### Compilar
+
+En la carpeta de bm80v2_iso
+
+```shell
+qmk compile -kb kprepublic/bm80v2_iso -km alejandroppir
+```
+
+## Flashear
+
+Abrir qmk toolbox
+Poner el teclado en modo flash (tecla utils, y escape)
+Cargar el fichero.hex
+Si nos da error de dfu-programmer, descargarlo y meterlo en %AppData%/Local/QMK/Toolbox https://github.com/dfu-programmer/dfu-programmer
+Darle a Flash
+
+Desenchufar y enchufar teclado
+
+## Errores
+
+Si no nos flashea, reiniciar

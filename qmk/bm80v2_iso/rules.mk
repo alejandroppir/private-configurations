@@ -16,12 +16,12 @@ NKRO_ENABLE = yes           # Enable N-Key Rollover
 BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
 RGBLIGHT_ENABLE = no        # Enable keyboard RGB underglow
 AUDIO_ENABLE = no           # Audio output
-KEY_OVERRIDE_ENABLE = yes   # Override key
+KEY_OVERRIDE_ENABLE = no   # Override key
 TAP_DANCE_ENABLE = yes
 # CONSOLE_ENABLE = yes
 
 RGB_MATRIX_ENABLE = yes         # Use RGB matrix
-RGB_MATRIX_DRIVER = IS31FL3741
+RGB_MATRIX_DRIVER = is31fl3741
 
 LTO_ENABLE = yes
 
