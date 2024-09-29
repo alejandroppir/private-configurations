@@ -15,13 +15,15 @@ HSV prev_hsv;
 enum tap_dance {
     TD_LSFT_CAPS,
     TD_RSFT_CAPS,
-    TD_ACUTE
+    TD_ACUTE,
+    TD_ES_GRV
 };
 
 tap_dance_action_t tap_dance_actions[] = {
     [TD_LSFT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
     [TD_RSFT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_RSFT, KC_CAPS),
-    [TD_ACUTE] = ACTION_TAP_DANCE_DOUBLE(ES_ACUT, ES_QUOT)
+    [TD_ACUTE] = ACTION_TAP_DANCE_DOUBLE(ES_ACUT, ES_QUOT),
+    [TD_ES_GRV] = ACTION_TAP_DANCE_DOUBLE(ES_GRV, ES_QUOT)
 };
 
 enum layers {
@@ -32,6 +34,11 @@ enum layers {
     _UTL  // Utils layout
 };
 
+enum custom_keycodes {
+    DEF_RGB = SAFE_RANGE,  // Define a custom keycode starting from SAFE_RANGE
+    // other custom keycodes can be defined here
+};
+
 // Keymap definitions
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -40,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_GRV,             KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,     ES_MINS,     ES_PLUS,  KC_BSPC,          KC_DEL,  KC_PGUP, KC_HOME,
         KC_TAB,             KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,     ES_LBRC,     ES_RBRC,                    KC_INS,  KC_PGDN, KC_END,
         TG(_EXT),           KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    ES_NTIL,  TD(TD_ACUTE),ES_SCLN,  KC_ENT,
-        TD(TD_LSFT_CAPS),   ES_QUOT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,   ES_SLSH,               TD(TD_RSFT_CAPS),          KC_UP,
+        TD(TD_LSFT_CAPS),   TD(TD_ES_GRV),  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,   ES_SLSH,               TD(TD_RSFT_CAPS),          KC_UP,
         KC_LCTL,            KC_LGUI, KC_LALT,                   KC_SPC,                                      KC_RALT,  MO(_UTL),    KC_APP ,  KC_RCTL,          KC_LEFT, KC_DOWN, KC_RGHT
     ),
 
@@ -73,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_UTL ] = LAYOUT_tkl_iso(
         QK_BOOT,          TO(_CST),TO(_LAB),TO(_ESB),_______,_______, _______, _______, _______,TO(_UTL),  _______,  _______, _______,    KC_KP_7, KC_KP_8, KC_KP_9,
-        _______, RGB_TOG, RGB_MOD,RGB_RMOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______,  _______,  _______, _______,    KC_KP_4, KC_KP_5, KC_KP_6,
+        _______, RGB_TOG, RGB_MOD,RGB_RMOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, DEF_RGB,  _______,  _______, _______,    KC_KP_4, KC_KP_5, KC_KP_6,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,  _______,             KC_KP_1, KC_KP_2, KC_KP_3,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,  _______, KC_0,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,           _______,             _______,
@@ -85,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 const custom_key_t custom_shift_keys[] = {  // Declara un array de tipo custom_key_t llamado custom_shift_keys
     // CST keyboard
      // row1
-    {ES_GRV, ES_TILD, 1<<_CST},  // Mapea el acento grave (`` ` ``) y tilde (`~`) en la capa CST
+    //{ES_GRV, ES_TILD, 1<<_CST},  // Mapea el acento grave (`` ` ``) y tilde (`~`) en la capa CST
     {KC_2, ES_AT, 1<<_CST},      // Mapea la tecla 2 para producir `@` en la capa CST
     {KC_3, ES_HASH, 1<<_CST},    // Mapea la tecla 3 para producir `#` en la capa CST
     {KC_6, ES_CIRC, 1<<_CST},    // Mapea la tecla 6 para producir `^` en la capa CST
@@ -103,6 +110,7 @@ const custom_key_t custom_shift_keys[] = {  // Declara un array de tipo custom_k
     {TD(TD_ACUTE), ES_QUOT, 1<<_CST}, // Mapea la tecla de acento agudo que produce `'` en la capa CST
     {ES_SCLN, ES_COLN, 1<<_CST},  // Mapea el punto y coma (`;`) para producir `:` en la capa CST
     // row4
+    {TD(TD_ES_GRV), ES_DQUO, 1<<_CST},  // Mapea la coma (```) para producir `"` en la capa CST
     {KC_COMM, ES_LABK, 1<<_CST},  // Mapea la coma (`,`) para producir `<` en la capa CST
     {KC_DOT, ES_RABK, 1<<_CST},   // Mapea el punto (`.`) para producir `>` en la capa CST
 
@@ -133,7 +141,7 @@ const custom_key_t custom_shift_keys[] = {  // Declara un array de tipo custom_k
 const custom_key_t custom_altgr_keys[] = {  // Declara un array de tipo custom_key_t llamado custom_altgr_keys
     // CUS keyboard
     // row1
-    {ES_GRV, ES_TILD, 1<<_CST},      // Mapea el acento grave (`` ` ``) y tilde (`~`) en la capa CST
+    //{ES_GRV, ES_TILD, 1<<_CST},      // Mapea el acento grave (`` ` ``) y tilde (`~`) en la capa CST
     {KC_1, ES_IEXL, 1<<_CST},        // Mapea la tecla 1 para producir `¡` en la capa CST
     {KC_2, ES_AT, 1<<_CST},          // Mapea la tecla 2 para producir `@` en la capa CST
     {KC_7, ES_PIPE, 1<<_CST},        // Mapea la tecla 7 para producir `|` en la capa CST
@@ -183,6 +191,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   if (!process_custom_shift_keys(keycode, record)) { return false; }
   if (!process_custom_altgr_keys(keycode, record)) { return false; }
   // Your macros ...
+  switch (keycode) {
+        case DEF_RGB:
+            if (record->event.pressed) {
+                rgblight_mode(RGB_MATRIX_SOLID_REACTIVE);
+            }
+            return false;  // Skip all further processing of this key
+        default:
+            return true;  // Process all other keycodes normally
+    }
   return true;
 }
 
@@ -195,7 +212,7 @@ bool rgb_matrix_indicators_user(void) {
                 prev_hsv = rgb_matrix_get_hsv();
                 prev_mode = rgb_matrix_get_mode();
                 rgb_stored = true;
-                rgblight_mode(RGB_MATRIX_BREATHING);
+                rgblight_mode(RGB_MATRIX_CYCLE_PINWHEEL);
             }
             break;
         default:
